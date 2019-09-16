@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<MediaFile xmlns:dt="urn:schemas-microsoft-com:datatypes"><Reports><Report><RenderTime>0</RenderTime><ProcessVideo dt:dt="int">0</ProcessVideo><ProcessAudio dt:dt="int">1</ProcessAudio><HasVideo dt:dt="int">0</HasVideo><HasAudio dt:dt="int">0</HasAudio><NumWarnings>0</NumWarnings><NumErrors>1</NumErrors><FilterBlocks><FilterBlock><ID>0</ID><Source dt:dt="string">{00000000-0000-0000-0000-000000000000}</Source><SourceFriendlyName dt:dt="string">Unknown</SourceFriendlyName><LookupType dt:dt="int">0</LookupType><NumWarnings>0</NumWarnings><NumErrors>1</NumErrors><Connections/><Messages><Message><Type dt:dt="int">2</Type><Number>1000</Number><Message dt:dt="string">Unable to find mapping for CodecConfig.
+
+Run CodecConfig and try again.</Message></Message></Messages><Pins/></FilterBlock></FilterBlocks><Speeders><Speeder><Index dt:dt="int">1</Index><Micro dt:dt="int">-1309135</Micro></Speeder></Speeders></Report></Reports></MediaFile>
