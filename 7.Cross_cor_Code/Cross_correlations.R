@@ -1,7 +1,7 @@
 
-Physiology_Data_bef_Crosscor <- read_sav("~/Insert_path/Raw_data_with_missin")
+Physiology_Data_bef_Crosscor <- read_sav("Here load in Raw data file")
 
-Physio_data <- Physiology_Data_bef_Crosscor
+
 options(width = 110)
 
 
@@ -115,38 +115,6 @@ d$ExclM_SC[d$filename == "Dyad 63"] <- 1
 d$ExclM_SC[d$filename == "Dyad 69"] <- 1
 d$ExclM_SC[d$filename == "Dyad 70"] <- 1
 
-# Pupil Female
-d$ExclF_Pupil <- 0
-d$ExclF_Pupil [(d$filename == "Dyad46" & d$epochName== "ECG_F_S_Int")] <- 1 
-d$ExclF_Pupil[d$filename == "Dyad1"] <- 1 
-d$ExclF_Pupil[d$filename == "Dyad9"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad14"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad23"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad28"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad35"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad36"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad42"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad 58"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad 59"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad 60"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad 63"] <- 1
-d$ExclF_Pupil[d$filename == "Dyad 69"] <- 1
-# Pupil Male
-d$ExclM_Pupil <- 0
-d$ExclM_Pupil [(d$filename == "Dyad46" & d$epochName== "ECG_F_S_Int")] <- 1 
-d$ExclM_Pupil[d$filename == "Dyad1"] <- 1 
-d$ExclM_Pupil[d$filename == "Dyad9"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad14"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad23"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad28"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad35"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad36"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad42"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad 58"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad 59"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad 60"] <- 1
-d$ExclM_Pupil[d$filename == "Dyad 63"] <- 1
-
 #### create "global" excluding variable per physio response
 
 d$Excl_HR <- 0
@@ -159,13 +127,6 @@ for (i in 1:length(d$ExclF_HR)) {
 d$Excl_SC <- 0
 for (i in 1:length(d$ExclF_SC)) {
   if (d$ExclF_SC[i] || d$ExclM_SC[i]){
-    d$Excl_SC[i] <- 1
-  }
-}
-
-d$Excl_Pupil <- 0
-for (i in 1:length(d$ExclF_Pupil)) {
-  if (d$ExclF_Pupil[i] || d$ExclM_Pupil[i]){
     d$Excl_SC[i] <- 1
   }
 }
@@ -284,7 +245,7 @@ pb <- txtProgressBar(min = 0, max = numdyadWCC, style = 3)
 # number of samples (we have a sample rate of 20 Hz, so 20 samples = 1 sec)
 wSize <- 10*8
 tMax <- 10*4 # 4 sec
-wInc <- 20  # 1/10 sec
+wInc <- 20  # 1/20 sec
 tInc <- 1 
 
 windowMax <- 10*8  # xxx
@@ -381,7 +342,6 @@ for (i in 1:HRWCC) {
 
 
 HRSynchronyMeasures_matrix <- matrix(NA, nrow = numdyadWCC, ncol = 15)
-
 colnames(HRSynchronyMeasures_matrix) <- c("dyad_HR", "Epochname","ID_trial", "WCCmean_HFHR", "WCCsd_HFHR", "TLmean_HFHR", "TLsd_HFHR", 
                                         "WCCmean_LFHR", "WCCsd_LFHR", "TLmean_LFHR", "TLsd_LFHR", 
                                         "WCCmean_IHR", "WCCsd_IHR", "TLmean_IHR", "TLsd_IHR")
@@ -390,11 +350,7 @@ colnames(HRSynchronyMeasures_matrix) <- c("dyad_HR", "Epochname","ID_trial", "WC
 SCSynchronyMeasures_matrix <- matrix(NA, nrow = numdyadWCC, ncol = 7)
 colnames(SCSynchronyMeasures_matrix) <- c("dyad_SC", "Epochname","ID_trial", "WCCmean_SCL", "WCCsd_SCL", "TLmean_SCL", "TLsd_SCL") 
                                           
-                                      
-
-PupilSynchronyMeasures_matrix <- matrix(NA, nrow = numdyadWCC, ncol = 7)
-colnames(PupilSynchronyMeasures_matrix) <- c("dyad_Pupil","Epochname","ID_trial","WCCmean_Pupil", "WCCsd_Pupil", "TLmean_Pupil", "TLsd_Pupil")
-
+ 
 # get summary statistics 
 epochnum <-length(unique(dHR$epochName))
 
@@ -425,9 +381,6 @@ for (i in 1:SCWCC){
   write.csv(SCSynchronyMeasures_matrix, file = paste("SC_SynchMeasures", "_W", wSize, "_Incr", wInc, "_Tmax", tMax, "_L",  ".csv", sep = ""))  #check
   
   
-write.csv(PupilSynchronyMeasures_matrix, file = paste("Pupil_SynchMeasures", "_W", wSize, "_Incr", wInc, "_Tmax", tMax, "_L",  ".csv", sep = ""))  #check
-
-
 
 # WCC function -------------------------------
 
